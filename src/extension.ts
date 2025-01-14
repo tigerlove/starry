@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import { RulesViewProvider } from './panels/RulesViewProvider';
 import { SettingsViewProvider } from './panels/SettingsViewProvider';
+import { ChatViewProvider } from "./panels/ChatViewProvider";
 
 /**
  * 扩展激活时调用的入口函数
@@ -47,6 +48,16 @@ export function activate(context: vscode.ExtensionContext) {
   );
 
   context.subscriptions.push(settingsCommand);
+
+  // Register Chat Provider and Command
+  const chatProvider = ChatViewProvider.getInstance(context.extensionUri);
+  
+  // Register Chat Command
+  context.subscriptions.push(
+    vscode.commands.registerCommand("starry-code.openChat", async () => {
+      await chatProvider.show();
+    })
+  );
 }
 
 /**

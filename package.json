@@ -37,12 +37,17 @@
     "commands": [
       {
         "command": "starry-code.openViewer",
-        "title": "Open Cursor Rules Viewer",
-        "category": "Cursor Rules"
+        "title": "Open Starry Cursor Rules Viewer",
+        "category": "Starry"
       },
       {
         "command": "starry-code.openSettings",
         "title": "Open Starry Settings",
+        "category": "Starry"
+      },
+      {
+        "command": "starry-code.openChat",
+        "title": "Open Starry Chat",
         "category": "Starry"
       }
     ],
@@ -78,7 +83,14 @@
           "name": "Rules"
         }
       ]
-    }
+    },
+    "keybindings": [
+      {
+        "command": "starry-code.openChat",
+        "key": "ctrl+shift+[",
+        "mac": "cmd+shift+["
+      }
+    ]
   },
   "scripts": {
     "install:all": "yarn install && cd webview-ui && yarn install",
