@@ -25,13 +25,20 @@ export class SettingsViewProvider implements vscode.WebviewViewProvider {
     };
 
     webviewView.webview.html = this.getHtmlForWebview(webviewView.webview);
+
+    // Handle webview errors
+    webviewView.webview.onDidReceiveMessage(message => {
+      if (message.type === 'error') {
+        vscode.window.showErrorMessage(`Webview Error: ${message.message}`);
+      }
+    });
   }
 
   public getHtmlForWebview(webview: vscode.Webview) {
-    const stylesUri = getUri(webview, this._extensionUri, ["webview-ui", "build", "assets", "index.css"]);
-    const scriptUri = getUri(webview, this._extensionUri, ["webview-ui", "build", "assets", "settings.js"]);
-    const codiconsUri = getUri(webview, this._extensionUri, ["webview-ui", "codicon.css"]);
-    
+    // Get the local path to main script run in the webview
+    const stylesUri = getUri(webview, this._extensionUri, ["webview-ui", "build", "assets", "settings.css"]);
+    const settingsScriptUri = getUri(webview, this._extensionUri, ["webview-ui", "build", "assets", "settings.js"]);
+
     const nonce = getNonce();
 
     return /*html*/`
@@ -42,12 +49,21 @@ export class SettingsViewProvider implements vscode.WebviewViewProvider {
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
           <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${webview.cspSource}; script-src 'nonce-${nonce}';">
           <link rel="stylesheet" type="text/css" href="${stylesUri}">
-          <link rel="stylesheet" type="text/css" href="${codiconsUri}">
+         
           <title>Starry Settings</title>
         </head>
         <body>
           <div id="root"></div>
-          <script type="module" nonce="${nonce}" src="${scriptUri}"></script>
+          <script type="module" nonce="${nonce}" src="${settingsScriptUri}"></script>
+          <script nonce="${nonce}">
+            window.addEventListener('error', function(event) {
+              const vscode = acquireVsCodeApi();
+              vscode.postMessage({
+                type: 'error',
+                message: event.message
+              });
+            });
+          </script>
         </body>
       </html>
     `;

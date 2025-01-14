@@ -8,9 +8,27 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        main: resolve(__dirname, 'index.html'),
+        index: resolve(__dirname, 'index.html'),
         settings: resolve(__dirname, 'settings.html'),
+        rules: resolve(__dirname, 'rules.html'),
       },
+      output: {
+        entryFileNames: `assets/[name].js`,
+        chunkFileNames: `assets/[name].js`,
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.name === 'index.css') {
+            const chunk = assetInfo.source?.toString() || '';
+            if (chunk.includes('settings')) {
+              return 'assets/settings.css';
+            }
+            if (chunk.includes('rules')) {
+              return 'assets/rules.css';
+            }
+            return 'assets/index.css';
+          }
+          return 'assets/[name].[ext]';
+        }
+      }
     },
     outDir: "build",
     assetsDir: "assets",

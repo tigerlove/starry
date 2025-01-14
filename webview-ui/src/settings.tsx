@@ -1,10 +1,11 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import Settings from './pages/Settings';
+import ReactDOM from 'react-dom';
 import './index.css';
+import Settings from './pages/Settings';
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+ReactDOM.render(
   <React.StrictMode>
     <Settings />
-  </React.StrictMode>
+  </React.StrictMode>,
+  document.getElementById('root')
 ); 

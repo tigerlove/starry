@@ -27,36 +27,57 @@ const RuleCard: React.FC<RuleCardProps> = ({ rule, onSelect }) => {
   };
 
   const removeIndentation = (content: string) => {
-    return content.split('\n').map(line => line.trimStart()).join('\n');
+    const lines = content.split('\n');
+    const minIndent = Math.min(...lines.filter(line => line.trim()).map(line => line.match(/^\s*/)?.[0].length || 0));
+    return lines.map(line => line.slice(minIndent)).join('\n');
   };
 
   return (
-    <div className="rule-card">
-      <div className="rule-header">
-        <h3 className="rule-title">
-          {rule.title}
-        </h3>
-        <div className="tags">
-          {rule.tags.map((tag, index) => (
-            <span key={index} className="tag">{tag}</span>
-          ))}
-        </div>
+    <div
+      className="cursor-pointer rounded-lg bg-zinc-800 p-4 shadow-lg transition-all hover:bg-zinc-700"
+      onClick={handleClick}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => e.key === 'Enter' && handleClick()}
+      aria-label={`Select rule: ${rule.title}`}
+    >
+      <h3 className="mb-2 text-xl font-semibold text-white">{rule.title}</h3>
+      <div className="mb-4 flex flex-wrap gap-2">
+        {rule.tags.map((tag) => (
+          <span
+            key={tag}
+            className="rounded-full bg-blue-500 px-2 py-1 text-xs font-medium text-white"
+          >
+            {tag}
+          </span>
+        ))}
       </div>
-      <div className="rule-preview">
+      <div className="prose prose-invert max-h-32 overflow-hidden text-sm text-gray-300">
         <ReactMarkdown>{removeIndentation(rule.content)}</ReactMarkdown>
       </div>
-      <div className="rule-footer" style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginTop: 'auto'
-      }}>
-        <div className="author">
-          {rule.author.name}
-        </div>
-        <button className="use-rule-button" onClick={handleClick}>
-          Use Rule
-        </button>
+      <div className="mt-4 flex items-center gap-2">
+        {rule.author.avatar && (
+          <img
+            src={rule.author.avatar}
+            alt={`${rule.author.name}'s avatar`}
+            className="h-6 w-6 rounded-full"
+          />
+        )}
+        <span className="text-sm text-gray-400">
+          {rule.author.url ? (
+            <a
+              href={rule.author.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-blue-400"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {rule.author.name}
+            </a>
+          ) : (
+            rule.author.name
+          )}
+        </span>
       </div>
     </div>
   );

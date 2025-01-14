@@ -300,31 +300,33 @@ export class RulesViewProvider implements vscode.WebviewViewProvider {
   }
 
   private _getHtmlForWebview(webview: vscode.Webview) {
-    console.log('Getting HTML for webview');
-    const stylesUri = getUri(webview, this._extensionUri, ["webview-ui", "build", "assets", "index.css"]);
-    const scriptUri = getUri(webview, this._extensionUri, ["webview-ui", "build", "assets", "index.js"]);
-
-    const resourceUris = {
-      stylesUri: stylesUri.toString(),
-      scriptUri: scriptUri.toString()
-    };
-    console.log('Resource URIs:', resourceUris);
+    const stylesUri = getUri(webview, this._extensionUri, ["webview-ui", "build", "assets", "rules.css"]);
+    const rulesScriptUri = getUri(webview, this._extensionUri, ["webview-ui", "build", "assets", "rules.js"]);
 
     const nonce = getNonce();
 
-    return /*html*/ `
+    return /*html*/`
       <!DOCTYPE html>
       <html lang="en">
         <head>
           <meta charset="UTF-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${webview.cspSource} 'unsafe-inline'; script-src 'nonce-${nonce}' 'unsafe-eval'; connect-src ${webview.cspSource} vscode-webview:;">
+          <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${webview.cspSource}; script-src 'nonce-${nonce}';">
           <link rel="stylesheet" type="text/css" href="${stylesUri}">
-          <title>Cursor Rules Viewer</title>
+          <title>Starry Rules</title>
         </head>
         <body>
           <div id="root"></div>
-          <script type="module" nonce="${nonce}" src="${scriptUri}"></script>
+          <script type="module" nonce="${nonce}" src="${rulesScriptUri}"></script>
+          <script nonce="${nonce}">
+            window.addEventListener('error', function(event) {
+              const vscode = acquireVsCodeApi();
+              vscode.postMessage({
+                type: 'error',
+                message: event.message
+              });
+            });
+          </script>
         </body>
       </html>
     `;
