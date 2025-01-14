@@ -39,7 +39,7 @@
   "contributes": {
     "commands": [
       {
-        "command": "cursor-rules.openViewer",
+        "command": "starry-code.openViewer",
         "title": "Open Cursor Rules Viewer",
         "category": "Cursor Rules"
       }
