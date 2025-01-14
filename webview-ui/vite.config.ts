@@ -6,20 +6,16 @@ import { resolve } from "path";
 export default defineConfig({
   plugins: [react()],
   build: {
-    outDir: "build",
     rollupOptions: {
       input: {
-        index: resolve(__dirname, 'index.html')
-      },
-      output: {
-        entryFileNames: `assets/[name].js`,
-        chunkFileNames: `assets/[name].js`,
-        assetFileNames: `assets/[name].[ext]`,
+        main: resolve(__dirname, 'index.html'),
+        settings: resolve(__dirname, 'settings.html'),
       },
     },
+    outDir: "build",
+    assetsDir: "assets",
   },
-  // Use relative base path for assets
-  base: "./",
-  // Use default public directory behavior
-  publicDir: 'public',
+  server: {
+    port: 3000,
+  },
 });

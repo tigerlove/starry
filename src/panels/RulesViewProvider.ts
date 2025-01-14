@@ -20,8 +20,8 @@ interface Rule {
   author: RuleAuthor;
 }
 
-export class RulesViewProvider {
-  public static readonly viewType = 'cursor-rules.rulesView';
+export class RulesViewProvider implements vscode.WebviewViewProvider {
+  public static readonly viewType = 'starry-code.rulesView';
   private _panel?: vscode.WebviewPanel;
   private static _instance: RulesViewProvider;
   private static readonly RULES_URL = 'https://raw.githubusercontent.com/tigerlove/vscode-extension-cursordir/main/webview-ui/public/rules.json';
@@ -39,6 +39,19 @@ export class RulesViewProvider {
       RulesViewProvider._instance = new RulesViewProvider(extensionUri);
     }
     return RulesViewProvider._instance;
+  }
+
+  public resolveWebviewView(
+    webviewView: vscode.WebviewView,
+    context: vscode.WebviewViewResolveContext,
+    _token: vscode.CancellationToken,
+  ) {
+    webviewView.webview.options = {
+      enableScripts: true,
+      localResourceRoots: [this._extensionUri],
+    };
+
+    webviewView.webview.html = this._getHtmlForWebview(webviewView.webview);
   }
 
   public show() {
