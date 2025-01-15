@@ -13,9 +13,8 @@ class VSCodeAPIWrapper {
   private readonly vsCodeApi: WebviewApi<unknown> | undefined;
 
   constructor() {
-    // Check if the acquireVsCodeApi function exists in the current development
-    // context (i.e. VS Code development window or web browser)
-    if (typeof acquireVsCodeApi === "function") {
+    // Check if the acquireVsCodeApi function exists in the current context
+    if (typeof acquireVsCodeApi === 'function') {
       this.vsCodeApi = acquireVsCodeApi();
     }
   }
@@ -31,8 +30,6 @@ class VSCodeAPIWrapper {
   public postMessage(message: unknown) {
     if (this.vsCodeApi) {
       this.vsCodeApi.postMessage(message);
-    } else {
-      console.log(message);
     }
   }
 
@@ -47,10 +44,8 @@ class VSCodeAPIWrapper {
   public getState(): unknown | undefined {
     if (this.vsCodeApi) {
       return this.vsCodeApi.getState();
-    } else {
-      const state = localStorage.getItem("vscodeState");
-      return state ? JSON.parse(state) : undefined;
     }
+    return undefined;
   }
 
   /**
@@ -64,12 +59,9 @@ class VSCodeAPIWrapper {
    *
    * @return The new state.
    */
-  public setState<T extends unknown | undefined>(newState: T): T {
+  public setState(state: unknown) {
     if (this.vsCodeApi) {
-      return this.vsCodeApi.setState(newState);
-    } else {
-      localStorage.setItem("vscodeState", JSON.stringify(newState));
-      return newState;
+      this.vsCodeApi.setState(state);
     }
   }
 }

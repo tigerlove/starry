@@ -96,7 +96,7 @@ export class ChatViewProvider {
   }
 
   private _getHtmlForWebview(webview: vscode.Webview) {
-    const styleResetUri = getUri(webview, this._extensionUri, ["webview-ui", "build", "assets", "index.css"]);
+    const styleResetUri = getUri(webview, this._extensionUri, ["webview-ui", "build", "assets", "style.css"]);
     const scriptUri = getUri(webview, this._extensionUri, ["webview-ui", "build", "assets", "index.js"]);
     const nonce = getNonce();
 
@@ -115,4 +115,4 @@ export class ChatViewProvider {
         </body>
       </html>`;
   }
-} 
+}

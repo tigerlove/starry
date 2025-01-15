@@ -300,7 +300,7 @@ export class RulesViewProvider implements vscode.WebviewViewProvider {
   }
 
   private _getHtmlForWebview(webview: vscode.Webview) {
-    const stylesUri = getUri(webview, this._extensionUri, ["webview-ui", "build", "assets", "rules.css"]);
+    const stylesUri = getUri(webview, this._extensionUri, ["webview-ui", "build", "assets", "style.css"]);
     const rulesScriptUri = getUri(webview, this._extensionUri, ["webview-ui", "build", "assets", "rules.js"]);
 
     const nonce = getNonce();

@@ -36,7 +36,7 @@ export class SettingsViewProvider implements vscode.WebviewViewProvider {
 
   public getHtmlForWebview(webview: vscode.Webview) {
     // Get the local path to main script run in the webview
-    const stylesUri = getUri(webview, this._extensionUri, ["webview-ui", "build", "assets", "settings.css"]);
+    const stylesUri = getUri(webview, this._extensionUri, ["webview-ui", "build", "assets", "style.css"]);
     const settingsScriptUri = getUri(webview, this._extensionUri, ["webview-ui", "build", "assets", "settings.js"]);
 
     const nonce = getNonce();

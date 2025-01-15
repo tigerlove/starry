@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import './global.css';
+import '@vscode/codicons/dist/codicon.css';
 import Settings from './pages/Settings';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
