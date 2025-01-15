@@ -37,17 +37,17 @@
     "commands": [
       {
         "command": "starry-code.openViewer",
-        "title": "Open Starry Cursor Rules Viewer",
+        "title": "Open StarryCode CursorRules Viewer",
         "category": "Starry"
       },
       {
         "command": "starry-code.openSettings",
-        "title": "Open Starry Settings",
+        "title": "Open StarryCode Settings",
         "category": "Starry"
       },
       {
         "command": "starry-code.openChat",
-        "title": "Open Starry Chat",
+        "title": "Open StarryCode Chat",
         "category": "Starry"
       }
     ],
