@@ -14,7 +14,12 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "typeRoots": ["./node_modules/@types", "./src/types"]
   },
-  "include": ["./src", "./public/*.json"]
+  "include": [
+    "src/**/*",
+    "./public/*.json",
+    "src/types/global.d.ts"
+  ]
 }

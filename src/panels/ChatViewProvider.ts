@@ -63,4 +63,15 @@ export class ChatViewProvider implements vscode.WebviewViewProvider {
         </body>
       </html>`;
   }
+
+  private handleMessage(message: any) {
+    switch (message.type) {
+      case 'chat':
+        // 处理从 webview 发来的聊天消息
+        console.log('Received chat message:', message.message)
+        // 在这里添加你的聊天消息处理逻辑
+        break
+      // ... 其他消息类型的处理
+    }
+  }
 }

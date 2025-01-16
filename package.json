@@ -70,7 +70,7 @@
       "activitybar": [
         {
           "id": "starry-code",
-          "title": "Starry Chat",
+          "title": "Starry Code",
           "icon": "assets/starry.svg"
         }
       ]
@@ -80,7 +80,7 @@
         {
           "type": "webview",
           "id": "starry-code.chatView",
-          "name": "Chat",
+          "name": "",
           "icon": "media/chat.svg"
         }
       ]
