@@ -81,7 +81,7 @@
           "type": "webview",
           "id": "starry-code.chatView",
           "name": "",
-          "icon": "media/chat.svg"
+          "icon": "assets/starry.svg"
         }
       ]
     },
