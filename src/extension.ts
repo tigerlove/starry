@@ -52,10 +52,17 @@ export function activate(context: vscode.ExtensionContext) {
   // Register Chat Provider and Command
   const chatProvider = ChatViewProvider.getInstance(context.extensionUri);
   
-  // Register Chat Command
   context.subscriptions.push(
-    vscode.commands.registerCommand("starry-code.openChat", async () => {
-      await chatProvider.show();
+    vscode.window.registerWebviewViewProvider(
+      ChatViewProvider.viewType,
+      chatProvider
+    )
+  );
+
+  // Register Focus Chat Command
+  context.subscriptions.push(
+    vscode.commands.registerCommand("starry-code.focusChat", async () => {
+      await vscode.commands.executeCommand('starry-code.chatView.focus');
     })
   );
 }

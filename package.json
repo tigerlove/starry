@@ -46,8 +46,8 @@
         "category": "Starry"
       },
       {
-        "command": "starry-code.openChat",
-        "title": "Open StarryCode Chat",
+        "command": "starry-code.focusChat",
+        "title": "Focus StarryCode Chat",
         "category": "Starry"
       }
     ],
@@ -70,8 +70,8 @@
       "activitybar": [
         {
           "id": "starry-code",
-          "title": "Starry",
-          "icon": "media/starry.svg"
+          "title": "Starry Chat",
+          "icon": "assets/starry.svg"
         }
       ]
     },
@@ -79,14 +79,15 @@
       "starry-code": [
         {
           "type": "webview",
-          "id": "starry-code.rulesView",
-          "name": "Rules"
+          "id": "starry-code.chatView",
+          "name": "Chat",
+          "icon": "media/chat.svg"
         }
       ]
     },
     "keybindings": [
       {
-        "command": "starry-code.openChat",
+        "command": "starry-code.focusChat",
         "key": "ctrl+shift+[",
         "mac": "cmd+shift+["
       }
