@@ -1,6 +1,6 @@
 import * as vscode from "vscode";
-import { getUri } from "../utilities/getUri";
-import { getNonce } from "../utilities/getNonce";
+import { getUri } from "../utils/getUri";
+import { getNonce } from "../utils/getNonce";
 
 export class ChatViewProvider implements vscode.WebviewViewProvider {
   public static readonly viewType = "starry-code.chatView";

@@ -3,11 +3,12 @@ import { RulesViewProvider } from './panels/RulesViewProvider';
 import { SettingsViewProvider } from './panels/SettingsViewProvider';
 import { ChatViewProvider } from "./panels/ChatViewProvider";
 
-/**
- * 扩展激活时调用的入口函数
- * @param context 扩展上下文，用于注册命令和管理资源
- */
+let outputChannel: vscode.OutputChannel
+
 export function activate(context: vscode.ExtensionContext) {
+  outputChannel = vscode.window.createOutputChannel("Starry")
+	context.subscriptions.push(outputChannel)
+
   // Register Rules View Provider
   const rulesProvider = RulesViewProvider.getInstance(context.extensionUri);
   context.subscriptions.push(
@@ -67,7 +68,4 @@ export function activate(context: vscode.ExtensionContext) {
   );
 }
 
-/**
- * 扩展停用时调用的清理函数
- */
 export function deactivate() {}

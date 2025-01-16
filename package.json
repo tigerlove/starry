@@ -1,7 +1,7 @@
 {
   "name": "starry-code",
   "displayName": "StarryCode",
-  "description": "A AI assistant for code",
+  "description": "A AI assistant for code,Forked from Cline",
   "version": "1.0.0",
   "publisher": "luunderstars",
   "author": {
@@ -135,7 +135,14 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@anthropic-ai/bedrock-sdk": "^0.12.0",
+    "@anthropic-ai/sdk": "^0.33.1",
+    "@anthropic-ai/vertex-sdk": "^0.6.1",
+    "@google/generative-ai": "^0.21.0",
+    "@types/clone-deep": "^4.0.4",
     "@types/node-fetch": "^2.6.12",
+    "@types/pdf-parse": "^1.1.4",
+    "@types/turndown": "^5.0.5",
     "axios": "^1.7.9",
     "cheerio": "^1.0.0",
     "chokidar": "^4.0.3",

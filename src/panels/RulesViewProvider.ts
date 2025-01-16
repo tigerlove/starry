@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
-import { getNonce } from '../utilities/getNonce';
-import { getUri } from '../utilities/getUri';
+import { getNonce } from '../utils/getNonce';
+import { getUri } from '../utils/getUri';
 import * as fs from 'fs';
 import * as path from 'path';
 import fetch from 'node-fetch';
